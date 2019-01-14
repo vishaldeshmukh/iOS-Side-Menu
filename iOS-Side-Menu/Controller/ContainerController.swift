@@ -27,6 +27,14 @@ class ContainerController: UIViewController {
         return .lightContent
     }
     
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return isExpanded
+    }
+    
     //MARK:- Handlers
     
     func configureHomeController() {
@@ -43,6 +51,7 @@ class ContainerController: UIViewController {
         if menuViewController == nil {
             //add menu view controller here
             menuViewController = MenuViewController()
+            menuViewController.delegate = self
             view.insertSubview(menuViewController.view, at: 0)
             addChild(menuViewController)
             menuViewController.didMove(toParent: self)
@@ -50,32 +59,55 @@ class ContainerController: UIViewController {
         }
     }
     
-    func showMenuController(shouldExpand: Bool) {
+    func showMenuController(shouldExpand: Bool, menuOption: MenuOption?) {
         
         if shouldExpand {
             //Show Menu
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
-                self.navController.view.frame.origin.x = self.navController.view.frame.origin.x + 80
+                self.navController.view.frame.origin.x = self.navController.view.frame.width - 80
             }, completion: nil)
             
         } else {
             //Hide Menu
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
-                self.navController.view.frame.origin.x = 0
-            }, completion: nil)
+            
+            
+            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
+                 self.navController.view.frame.origin.x = 0
+            }) { (_) in
+                guard let menuOption = menuOption else {return}
+                self.didSelectMenuOption(menuOption: menuOption)
+            }
         }
+        animateStatusBar()
+    }
+    
+    func didSelectMenuOption(menuOption: MenuOption) {
+        switch menuOption {
+            case .Profile: print("Profile")
+            case .Inbox:print("Inbox")
+            case .Notifications:print("Notifications")
+            case .Settings:print("Settings")
+        }
+    }
+    
+    func animateStatusBar() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }, completion: nil)
     }
     
 }
 
 extension ContainerController : HomeControllerDelegate {
-    func handleMenuToggle() {
-        //configureMenuController()
+    func handleMenuToggle(forMenuOption menuOption: MenuOption?) {
         if !isExpanded {
             configureMenuController()
         }
         
         isExpanded = !isExpanded
-        showMenuController(shouldExpand: isExpanded)
+        showMenuController(shouldExpand: isExpanded, menuOption: menuOption)
     }
-}
+    
+     
+    }
+
