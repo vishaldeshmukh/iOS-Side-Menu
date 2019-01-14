@@ -23,6 +23,8 @@ class ContainerController: UIViewController {
         configureHomeController()
     }
     
+    //MARK:- Status Bar
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -69,8 +71,6 @@ class ContainerController: UIViewController {
             
         } else {
             //Hide Menu
-            
-            
             UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                  self.navController.view.frame.origin.x = 0
             }) { (_) in
@@ -109,5 +109,5 @@ extension ContainerController : HomeControllerDelegate {
     }
     
      
-    }
+}
 
