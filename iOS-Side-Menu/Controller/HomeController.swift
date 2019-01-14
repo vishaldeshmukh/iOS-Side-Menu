@@ -12,14 +12,31 @@ class HomeController: UIViewController {
     
     //MARK:- Properties
     
+    var delegate: HomeControllerDelegate?
+    
     //MARK:- init
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
+        configureNavigationBar()
     }
     
     //MARK:- Handlers
+    
+   
+    func configureNavigationBar() {
+        self.navigationController?.navigationBar.barTintColor = .darkGray
+        self.navigationController?.navigationBar.barStyle = .black // to make navigation contents white
+        
+        navigationItem.title = "Side Menu"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu").withRenderingMode(UIImage.RenderingMode.alwaysOriginal), style: UIBarButtonItem.Style.plain, target: self, action: #selector(handleMenuToggle))
+    }
+    
+    @objc func handleMenuToggle() {
+        delegate?.handleMenuToggle()
+    }
+    
     
     
 }

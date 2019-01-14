@@ -13,6 +13,7 @@
 		66F88BAC21ECE913008D3879 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F88BAB21ECE913008D3879 /* ContainerController.swift */; };
 		66F88BAE21ECE921008D3879 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F88BAD21ECE921008D3879 /* HomeController.swift */; };
 		66F88BB021ECE92A008D3879 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F88BAF21ECE92A008D3879 /* MenuController.swift */; };
+		66F88BB221ECF130008D3879 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F88BB121ECF130008D3879 /* Protocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		66F88BAB21ECE913008D3879 /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		66F88BAD21ECE921008D3879 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		66F88BAF21ECE92A008D3879 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		66F88BB121ECF130008D3879 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		66F88BAA21ECE8D5008D3879 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				66F88BB121ECF130008D3879 /* Protocols.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66F88BB221ECF130008D3879 /* Protocols.swift in Sources */,
 				66F88BB021ECE92A008D3879 /* MenuController.swift in Sources */,
 				66F88B9621ECE68F008D3879 /* AppDelegate.swift in Sources */,
 				66F88BAC21ECE913008D3879 /* ContainerController.swift in Sources */,
