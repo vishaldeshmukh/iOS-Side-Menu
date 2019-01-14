@@ -13,6 +13,8 @@ class ContainerController: UIViewController {
     //MARK:- Properties
     
     var menuViewController: MenuViewController!
+    var navController: UIViewController!
+    var isExpanded = false
     
     //MARK:- init
     
@@ -30,7 +32,7 @@ class ContainerController: UIViewController {
     func configureHomeController() {
         let homeController = HomeController()
         homeController.delegate = self
-        let navController = UINavigationController(rootViewController: homeController)
+        navController = UINavigationController(rootViewController: homeController)
         
         view.addSubview(navController.view)
         addChild(navController)
@@ -48,10 +50,32 @@ class ContainerController: UIViewController {
         }
     }
     
+    func showMenuController(shouldExpand: Bool) {
+        
+        if shouldExpand {
+            //Show Menu
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
+                self.navController.view.frame.origin.x = self.navController.view.frame.origin.x + 80
+            }, completion: nil)
+            
+        } else {
+            //Hide Menu
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
+                self.navController.view.frame.origin.x = 0
+            }, completion: nil)
+        }
+    }
+    
 }
 
 extension ContainerController : HomeControllerDelegate {
     func handleMenuToggle() {
-        configureMenuController()
+        //configureMenuController()
+        if !isExpanded {
+            configureMenuController()
+        }
+        
+        isExpanded = !isExpanded
+        showMenuController(shouldExpand: isExpanded)
     }
 }
