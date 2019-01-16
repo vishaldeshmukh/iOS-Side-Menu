@@ -54,7 +54,13 @@ class ContainerController: UIViewController {
             //add menu view controller here
             menuViewController = MenuViewController()
             menuViewController.delegate = self
-            view.insertSubview(menuViewController.view, at: 0)
+            
+            
+           
+            menuViewController.view.frame.size.width = menuViewController.view.frame.size.width-80
+            self.menuViewController.view.frame.origin.x = -menuViewController.view.frame.size.width
+            //view.insertSubview(menuViewController.view, at: 0)
+            view.addSubview(menuViewController.view)
             addChild(menuViewController)
             menuViewController.didMove(toParent: self)
             print("Did add menu controller")
@@ -66,13 +72,16 @@ class ContainerController: UIViewController {
         if shouldExpand {
             //Show Menu
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
-                self.navController.view.frame.origin.x = self.navController.view.frame.width - 80
+               // self.navController.view.frame.origin.x = self.navController.view.frame.width - 80
+                self.menuViewController.view.frame.origin.x = 0
             }, completion: nil)
             
         } else {
             //Hide Menu
             UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
-                 self.navController.view.frame.origin.x = 0
+                // self.menuViewController.view.frame.origin.x = 0
+                self.menuViewController.view.frame.origin.x = -self.menuViewController.view.frame.size.width
+
             }) { (_) in
                 guard let menuOption = menuOption else {return}
                 self.didSelectMenuOption(menuOption: menuOption)
